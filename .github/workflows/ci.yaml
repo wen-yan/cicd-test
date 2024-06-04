@@ -4,7 +4,6 @@ on: [push]
 jobs:
   check-bats-version:
     runs-on: ubuntu-latest
-    environment: test-environment
     steps:
     - uses: actions/checkout@v4
     # - uses: actions/setup-node@v4
