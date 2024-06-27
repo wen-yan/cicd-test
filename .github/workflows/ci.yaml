@@ -14,10 +14,9 @@ jobs:
           git symbolic-ref --quiet --short HEAD 2>/dev/null
           git rev-list --count HEAD
 
-      - name: Bump version and push tag
-        uses: laputansoft/github-tag-action@v4.6
-        with:
-          github_token: ${{ env.github-token }}
+      - name: Create tag
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           tag: 1.2.3-preview
-          dry_run: true
-
+        run: |
+          gh release create "$tag" --repo="$GITHUB_REPOSITORY" --title="${tag}" --generate-notes
