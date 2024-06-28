@@ -25,5 +25,9 @@ jobs:
           git symbolic-ref --quiet --short HEAD 2>/dev/null
           git rev-list --count HEAD
 
-      - name: Create tag
-        run: git tag ${{ github.event.inputs.version }}; git tag --list; git push origin tag ${{ github.event.inputs.version }}
+      # - name: Create tag
+      #   run: git tag ${{ github.event.inputs.version }}; git tag --list; git push origin tag ${{ github.event.inputs.version }}
+
+      - name: Try powershell
+        shell: pwsh
+        run: Get-Command dotnet
