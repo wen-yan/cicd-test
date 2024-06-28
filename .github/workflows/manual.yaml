@@ -30,4 +30,4 @@ jobs:
 
       - name: Try powershell
         shell: pwsh
-        run: Get-Command dotnet
+        run: ./build/build.ps1 -Directory abc -Version 1.2.3
