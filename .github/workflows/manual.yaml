@@ -36,3 +36,16 @@ jobs:
     steps:
       - name: Show message
         run: echo "this is not main branch, ${{ github.ref }}"
+
+  share-version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate Version
+        shell: pwsh
+        run: |
+          ./build/build.ps1
+          $Version = Get-Version
+          Write-Output $"::set-env name=Version::$Version"
+
+      - name: Receive Version
+        run: echo $Version
