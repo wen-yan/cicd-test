@@ -43,6 +43,7 @@ jobs:
       - name: Generate Version
         shell: pwsh
         run: |
+          dir
           . ./build/build.ps1
           $Version = Get-Version
           Write-Output $"::set-env name=Version::$Version"
