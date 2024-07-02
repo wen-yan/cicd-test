@@ -2,32 +2,37 @@ name: Manual Trigger Workflow
 on:
   workflow_dispatch:
     inputs:
-      branch:
-        description: "The branch to build"
-        required: true
       version:
         description: "new release/tag"
         required: true
 jobs:
   build:
+    if: ${{ github.ref == 'master' }}
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.inputs.branch }}
           fetch-depth: 0
           submodules: recursive
 
       - name: Show version
         run: |
+          git status
           git symbolic-ref --quiet --short HEAD 2>/dev/null
           git rev-list --count HEAD
 
       # - name: Create tag
       #   run: git tag ${{ github.event.inputs.version }}; git tag --list; git push origin tag ${{ github.event.inputs.version }}
 
-      - name: Try powershell
-        shell: pwsh
-        run: ./build/build.ps1 -Directory abc -Version 1.2.3
+      # - name: Try powershell
+      #   shell: pwsh
+      #   run: ./build/build.ps1 -Directory abc -Version 1.2.3
+
+  non-build:
+    if: ${{ github.ref != 'master' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show message
+        run: echo "this is not master branch"
