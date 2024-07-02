@@ -49,7 +49,7 @@ jobs:
           . ./build/build.ps1
           $Version = Get-Version
           Write-Output "Version = $Version"
-          Write-Output "RELEASE_VERSION=$Version" >> $GITHUB_OUTPUT
+          "RELEASE_VERSION=$Version" >> $GITHUB_OUTPUT
 
       - name: Receive Version
         run: |
