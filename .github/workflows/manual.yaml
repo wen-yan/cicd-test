@@ -35,4 +35,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Show message
-        run: echo "this is not main branch"
+        run: echo "this is not main branch, ${{ github.ref }}"
